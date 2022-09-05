@@ -4,7 +4,7 @@ include_once './vendor/autoload.php';
 
 function getPackages($limit = 15): \Generator
 {
-    $url = 'https://packagist.org/explore/popular.json';
+    $url = 'https://packagist.org/explore/popular.json?per_page=100';
     $yielded = 0;
 
     while(true) {
@@ -24,7 +24,8 @@ function getPackages($limit = 15): \Generator
 }
 
 $top = [];
-foreach (getPackages(1000) as $package) {
+foreach (getPackages(10000) as $i => $package) {
     $top[] = $package;
+    echo "$i\n";
 }
 file_put_contents('popular.json', json_encode($top));
