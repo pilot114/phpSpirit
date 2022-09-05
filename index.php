@@ -2,51 +2,7 @@
 
 include_once './vendor/autoload.php';
 
-$results = json_decode(file_get_contents('popular.json'), true);
-
-function flat(array $array, string $prefix = ''): array {
-    $result = [];
-    foreach ($array as $key => $value) {
-        $newKey = $prefix . (empty($prefix) ? '' : '.') . $key;
-        if (is_array($value)) {
-            $result = array_merge($result, flat($value, $newKey));
-        } else {
-            $result[$newKey] = $value;
-        }
-    }
-    return $result;
-}
-
-function groups(array $stats): array {
-    $firstLevelKeys = array_unique(
-        array_map(
-            fn($x) => explode('.', $x)[0],
-            array_keys($stats)
-        )
-    );
-
-    $grouped = [];
-    foreach ($firstLevelKeys as $firstLevelKey) {
-        $grouped[$firstLevelKey] = array_filter($stats, fn($key) => str_starts_with($key, $firstLevelKey), ARRAY_FILTER_USE_KEY);
-    }
-    return $grouped;
-}
-
-function build(array $results): array {
-    $stats = [];
-    foreach ($results as $result) {
-        $composerFile = "projects/{$result['name']}/composer.json";
-        if (!is_file($composerFile)) {
-            dump($result);
-            die();
-        }
-        $composer = json_decode(file_get_contents($composerFile), true);
-        foreach ($composer as $key => $value) {
-            $stats[$key][$result['name']] = base64_encode(json_encode($value));
-        }
-    }
-    return $stats;
-}
+$results = json_decode(file_get_contents('parsed.json'), true);
 
 /**
  * Заброшенные пакеты:
@@ -315,16 +271,14 @@ function type(array $input): array
     return $output;
 }
 
-$grouped = build($results);
-
-$keys = array_keys($grouped);
+$keys = array_keys($results);
 sort($keys);
 dump($keys);
 
 // для простых случаев
-//dump(array_map(fn($x) => json_decode(base64_decode($x)), $grouped['type']));
+//dump(array_map(fn($x) => json_decode(base64_decode($x)), $results['type']));
 
-$prepared = type($grouped['type']);
+$prepared = authors($results['authors']);
 
 //dump(array_map(fn($x) => count($x), $prepared));
-dump($prepared);
+dump(array_keys($prepared));

@@ -9,11 +9,14 @@ function build(array $results): array {
     foreach ($results as $result) {
         $composerFile = "projects/{$result['name']}/composer.json";
         if (!is_file($composerFile)) {
-            dump('project without composer.json');
-            dump($result);
+            dump('project without composer.json in root: ' . $result['name']);
             continue;
         }
         $composer = json_decode(file_get_contents($composerFile), true);
+        if (!$composer) {
+            dump(sprintf('error composer.json: %s - %s', $result['name'], json_last_error_msg()));
+            continue;
+        }
         foreach ($composer as $key => $value) {
             $stats[$key][$result['name']] = base64_encode(json_encode($value));
         }
@@ -22,4 +25,5 @@ function build(array $results): array {
 }
 
 $stats = build($results);
-dump(count($stats));
+
+file_put_contents('parsed.json', json_encode($stats));
