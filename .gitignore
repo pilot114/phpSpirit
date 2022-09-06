@@ -2,3 +2,4 @@ projects
 vendor
 .idea
 front/node_modules
+front/.cache
