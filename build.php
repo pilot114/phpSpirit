@@ -2,7 +2,97 @@
 
 include_once './vendor/autoload.php';
 
-$results = json_decode(file_get_contents('parsed.json'), true);
+class Report
+{
+    protected array $data = [];
+
+    public function __construct(string $fileName)
+    {
+        $this->data = json_decode(file_get_contents($fileName), true);
+    }
+
+    /**
+     * Статистика по ключам композер файла
+     */
+    protected function keys()
+    {
+        $standardComposerKeys = [
+            'name',
+            'description',
+            'version',
+            'type',
+            'keywords',
+            'homepage',
+            'readme',
+            'time',
+            'license',
+            'authors',
+            'support',
+            'funding',
+            // Package links
+            'require',
+            'require-dev',
+            'conflict',
+            'replace',
+            'provide',
+            'suggest',
+
+            'autoload',
+            'autoload-dev',
+            'include-path',
+            'target-dir',
+            'minimum-stability',
+            'prefer-stable',
+            'repositories',
+            'config',
+            'scripts',
+            'extra',
+            'bin',
+            'archive',
+            'abandoned',
+            'non-feature-branches',
+        ];
+
+        $counts = [];
+        foreach ($this->data as $composerFieldName => $packages) {
+            $counts[$composerFieldName] = count($packages);
+        }
+        $keys = array_keys($this->data);
+
+        $countKeys = count($keys);
+        dump("Всего использованных ключей: $countKeys");
+
+        $nonStandardKeys = array_diff($keys, $standardComposerKeys);
+        $countNonStandardKeys = count($nonStandardKeys);
+        dump("Нестандартных ключей: $countNonStandardKeys");
+        $prep = array_filter($counts, fn($key) => in_array($key, $nonStandardKeys), ARRAY_FILTER_USE_KEY);
+        arsort($prep);
+        dump($prep);
+
+        $countStandardComposerKeys = count($standardComposerKeys);
+        dump("Стандартных ключей: $countStandardComposerKeys");
+        $prep = array_filter($counts, fn($key) => !in_array($key, $nonStandardKeys), ARRAY_FILTER_USE_KEY);
+        arsort($prep);
+        dump($prep);
+    }
+
+    public function buildSummary()
+    {
+        $this->keys();
+
+// для простых случаев
+//dump(array_map(fn($x) => json_decode(base64_decode($x)), $results['type']));
+
+//        $prepared = authors($results['authors']);
+
+//dump(array_map(fn($x) => count($x), $prepared));
+//        dump(array_keys($prepared));
+        return null;
+    }
+}
+
+$report = new Report('./composer_cache.json');
+$data = $report->buildSummary();
 
 /**
  * Заброшенные пакеты:
@@ -270,15 +360,3 @@ function type(array $input): array
     }
     return $output;
 }
-
-$keys = array_keys($results);
-sort($keys);
-dump($keys);
-
-// для простых случаев
-//dump(array_map(fn($x) => json_decode(base64_decode($x)), $results['type']));
-
-$prepared = authors($results['authors']);
-
-//dump(array_map(fn($x) => count($x), $prepared));
-dump(array_keys($prepared));

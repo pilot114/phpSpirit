@@ -26,4 +26,4 @@ function build(array $results): array {
 
 $stats = build($results);
 
-file_put_contents('parsed.json', json_encode($stats));
+file_put_contents('composer_cache.json', json_encode($stats));
