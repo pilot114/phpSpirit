@@ -331,7 +331,7 @@ class Report
         return $output;
     }
 
-    protected function required(array $input): array
+    protected function require(array $input): array
     {
         $output = [];
         foreach ($input as $package => $data) {
