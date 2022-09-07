@@ -1,10 +1,11 @@
-# Description
+# Что это?
 
-Статистический отчет по 10000 популярным php пакетам с https://packagist.org/
+Статистический отчет по 10 000 популярным php пакетам с https://packagist.org/
 
 # Как это рабатет
 
-- С popular.json cкачиваем список пакетов с https://packagist.org/explore/popular.json
-- С помощью библиотеки knplabs/packagist-api получаем список репозиториев, скачиваем в ./projects
-- composer_cache.php проходит по скачанным репозиториям и скливает все композер-файлы в composer_cache.json
-- build.php генерирует отчет
+- Cкачиваем список пакетов с https://packagist.org/explore/popular.json
+- С помощью библиотеки knplabs/packagist-api получаем список репозиториев
+- Проходим по скачанным репозиториям и склеиваем все композер-файлы в composer_cache.json
+- Генерируем итоговый report.json с агрегированными данными
+- Рендерим данные в удобочитаемый html отчет

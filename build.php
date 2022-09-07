@@ -14,24 +14,44 @@ class Report
         $this->data = json_decode(file_get_contents($fileName), true);
     }
 
-    public function buildSummary()
+    public function buildSummary(): void
     {
         $this->keys();
 
+        $result = [
+            'head' => [
+                'repoCount'    => 1_000,
+                'totalSize'    => '50G',
+                'totalGitSize' => '20G',
+                'totalPhpSize' => '10G',
+            ],
+            'composerFields' => []
+        ];
         foreach ($this->data as $field => $packages) {
-//            dump("$field: " . count($packages));
+            $item = [
+                'name' => $field,
+                'desc' => 'desc',
+                'count' => 0,
+                'data' => [],
+            ];
+
             if (method_exists($this, $field)) {
-//                dump("> $field()");
-//                $data =  $this->$field($packages);
+                dump("> $field()");
+                $data = $this->$field($packages);
+                $item['count'] = count($data);
+                $item['data'] = $data;
             } else {
                 dump("# $field");
-                foreach ($packages as $packageName => $data) {
-                    $data = json_decode(base64_decode($data));
-//                    dump($data);
+                $data = [];
+                foreach ($packages as $packageName => $x) {
+                    $data[$packageName] = json_decode(base64_decode($x));
                 }
+                $item['count'] = count($packages);
+                $item['data'] = $data;
             }
+            $result['composerFields'][$field] = $item;
         }
-        return null;
+        file_put_contents('./serve/src/report.json', json_encode($result));
     }
 
     protected function name(array $input): array

@@ -24,7 +24,7 @@ function getPackages($limit = 15): \Generator
 }
 
 $top = [];
-foreach (getPackages(10000) as $i => $package) {
+foreach (getPackages(1000) as $i => $package) {
     $top[] = $package;
     echo "$i\n";
 }
