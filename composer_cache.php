@@ -7,7 +7,8 @@ $results = json_decode(file_get_contents('popular.json'), true);
 function build(array $results): array {
     $stats = [];
     foreach ($results as $result) {
-        $composerFile = "projects/{$result['name']}/composer.json";
+        $projectDir = "projects/{$result['name']}";
+        $composerFile = "$projectDir/composer.json";
         if (!is_file($composerFile)) {
             dump('project without composer.json in root: ' . $result['name']);
             continue;
@@ -20,6 +21,7 @@ function build(array $results): array {
         foreach ($composer as $key => $value) {
             $stats[$key][$result['name']] = base64_encode(json_encode($value));
         }
+        $stats['_projects'][] = $projectDir;
     }
     return $stats;
 }

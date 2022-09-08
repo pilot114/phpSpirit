@@ -2,60 +2,91 @@
 
 include_once './vendor/autoload.php';
 
+use Symfony\Component\Finder\Finder;
+
 class Report
 {
     protected array $data = [];
+    protected array $packages = [];
 
     // for output
     protected array $nonStandardKeys = [];
 
-    public function __construct(string $fileName)
+    public function __construct(string $composerName, string $packagesListName)
     {
-        $this->data = json_decode(file_get_contents($fileName), true);
+        $this->data = json_decode(file_get_contents($composerName), true);
+        $this->packages = json_decode(file_get_contents($packagesListName), true);
     }
 
     public function buildSummary(): void
     {
-        $this->keys();
-
         $result = [
-            'head' => [
-                'repoCount'    => 1_000,
-                'totalSize'    => '50G',
-                'totalGitSize' => '20G',
-                'totalPhpSize' => '10G',
-            ],
+            'head' => $this->head(),
             'composerFields' => []
         ];
-        foreach ($this->data as $field => $packages) {
-            $item = [
-                'name' => $field,
-                'desc' => 'desc',
-                'count' => 0,
-                'data' => [],
-            ];
+        $this->keys();
 
+
+        foreach ($this->data as $field => $packages) {
             if (method_exists($this, $field)) {
                 dump("> $field()");
-                $data = $this->$field($packages);
-                $item['count'] = count($data);
-                $item['data'] = $data;
+                $item = $this->$field($packages);
             } else {
                 dump("# $field");
-                $data = [];
-                foreach ($packages as $packageName => $x) {
-                    $data[$packageName] = json_decode(base64_decode($x));
-                }
-                $item['count'] = count($packages);
-                $item['data'] = $data;
+                $item = $this->common($packages, $field);
             }
             $result['composerFields'][$field] = $item;
         }
         file_put_contents('./serve/src/report.json', json_encode($result));
     }
 
+    protected function head(): array
+    {
+        $finder = new Finder();
+        foreach ($this->data['_projects'] as $projectDir) {
+            $dirSize = `du -sh $projectDir`;
+            dump($dirSize);
+            die();
+
+            dump($projectDir);
+            $phpFiles = $finder->files()->in($projectDir)->name(['*.php']);
+            foreach ($phpFiles as $file) {
+                $size = $file->getSize();
+                echo $size;
+                die();
+            }
+        }
+        unset($this->data['_projects']);
+        return [
+            'repoCount'    => 0,
+            'totalSize'    => '',
+            'totalGitSize' => '',
+            'totalPhpSize' => '',
+        ];
+    }
+
+    protected function common(array $input, string $name): array
+    {
+        $item = [
+            'name' => $name,
+            'desc' => 'desc',
+            'count' => 0,
+            'data' => [],
+        ];
+        foreach ($input as $packageName => $x) {
+            $item['data'][$packageName] = json_decode(base64_decode($x));
+        }
+        return $item;
+    }
+
     protected function name(array $input): array
     {
+        $item = [
+            'name' => 'name',
+            'desc' => 'desc',
+            'count' => 0,
+            'data' => [],
+        ];
         $output = [];
         foreach ($input as $package => $data) {
             $data = json_decode(base64_decode($data), true);
@@ -410,5 +441,5 @@ class Report
     }
 }
 
-$report = new Report('./composer_cache.json');
+$report = new Report('./composer_cache.json', './popular.json');
 $data = $report->buildSummary();

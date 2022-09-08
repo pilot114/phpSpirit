@@ -1,6 +1,7 @@
 {
     "require": {
-        "knplabs/packagist-api": "^2.0"
+        "knplabs/packagist-api": "^2.0",
+        "symfony/finder": "^6.1"
     },
     "require-dev": {
         "symfony/var-dumper": "^6.1"
