@@ -1,6 +1,6 @@
 <?php
 
-include_once './vendor/autoload.php';
+include_once __DIR__ . '/../vendor/autoload.php';
 
 function getPackages($limit = 15): \Generator
 {
@@ -23,9 +23,11 @@ function getPackages($limit = 15): \Generator
     }
 }
 
+$count = 1000;
+
 $top = [];
-foreach (getPackages(1000) as $i => $package) {
+foreach (getPackages($count) as $i => $package) {
     $top[] = $package;
     echo "$i\n";
 }
-file_put_contents('popular.json', json_encode($top));
+file_put_contents(__DIR__ . "/../tmp/{$count}_popular.json", json_encode($top, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));

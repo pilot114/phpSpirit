@@ -1,13 +1,12 @@
 <?php
 
-include_once './vendor/autoload.php';
+include_once __DIR__ . '/../vendor/autoload.php';
 
-$results = json_decode(file_get_contents('popular.json'), true);
-
-function build(array $results): array {
+function build(array $results, string $dir): array
+{
     $stats = [];
     foreach ($results as $result) {
-        $projectDir = "projects/{$result['name']}";
+        $projectDir = "$dir/{$result['name']}";
         $composerFile = "$projectDir/composer.json";
         if (!is_file($composerFile)) {
             dump('project without composer.json in root: ' . $result['name']);
@@ -26,6 +25,8 @@ function build(array $results): array {
     return $stats;
 }
 
-$stats = build($results);
+$dirTmp = __DIR__ . '/../tmp';
 
-file_put_contents('composer_cache.json', json_encode($stats));
+$results = json_decode(file_get_contents("$dirTmp/1000_popular.json"), true);
+$stats = build($results, "$dirTmp/projects");
+file_put_contents("$dirTmp/composer_cache.json", json_encode($stats, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));

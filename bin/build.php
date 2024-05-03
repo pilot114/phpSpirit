@@ -18,14 +18,13 @@ class Report
         $this->packages = json_decode(file_get_contents($packagesListName), true);
     }
 
-    public function buildSummary(): void
+    public function buildSummary(string $path): void
     {
         $result = [
             'head' => $this->head(),
             'composerFields' => []
         ];
         $this->keys();
-
 
         foreach ($this->data as $field => $packages) {
             if (method_exists($this, $field)) {
@@ -37,26 +36,26 @@ class Report
             }
             $result['composerFields'][$field] = $item;
         }
-        file_put_contents('./serve/src/report.json', json_encode($result));
+        file_put_contents($path, json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 
     protected function head(): array
     {
-        $finder = new Finder();
-        foreach ($this->data['_projects'] as $projectDir) {
-            $dirSize = `du -sh $projectDir`;
-            dump($dirSize);
-            die();
-
-            dump($projectDir);
-            $phpFiles = $finder->files()->in($projectDir)->name(['*.php']);
-            foreach ($phpFiles as $file) {
-                $size = $file->getSize();
-                echo $size;
-                die();
-            }
-        }
-        unset($this->data['_projects']);
+//        $finder = new Finder();
+//        foreach ($this->data['_projects'] as $projectDir) {
+//            $dirSize = `du -sh $projectDir`;
+//            dump($dirSize);
+//            die();
+//
+//            dump($projectDir);
+//            $phpFiles = $finder->files()->in($projectDir)->name(['*.php']);
+//            foreach ($phpFiles as $file) {
+//                $size = $file->getSize();
+//                echo $size;
+//                die();
+//            }
+//        }
+//        unset($this->data['_projects']);
         return [
             'repoCount'    => 0,
             'totalSize'    => '',
@@ -441,5 +440,6 @@ class Report
     }
 }
 
-$report = new Report('./composer_cache.json', './popular.json');
-$data = $report->buildSummary();
+$tmpDir = __DIR__ . '/../tmp/';
+$report = new Report("$tmpDir/composer_cache.json", "$tmpDir/1000_popular.json");
+$report->buildSummary('./serve/src/report.json');
