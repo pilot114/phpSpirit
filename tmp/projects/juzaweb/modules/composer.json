@@ -1,0 +1,54 @@
+{
+    "name": "juzaweb/modules",
+    "homepage": "https://juzaweb.com",
+    "description": "Modules for Juzaweb CMS",
+    "license": "GPL-2.0",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\CMS\\Providers\\CMSServiceProvider"
+            ]
+        },
+        "juzaweb": {
+            "name": "Juzaweb CMS"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\": "modules/"
+        },
+        "files": [
+            "helpers/helpers.php"
+        ]
+    },
+    "require": {
+        "php": "^8.0|^8.1",
+        "ext-curl": "*",
+        "ext-fileinfo": "*",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "ext-pdo": "*",
+        "ext-simplexml": "*",
+        "ext-zip": "*",
+        "ext-xmlwriter": "*",
+        "awobaz/compoships": "^2.2",
+        "inertiajs/inertia-laravel": "^0.6.9",
+        "intervention/imagecache": "^2.5",
+        "juzaweb/log-viewer": "^1.0",
+        "darkaonline/l5-swagger": "^8.3",
+        "doctrine/dbal": "^3.3",
+        "intervention/image": "^2.5",
+        "juzaweb/config": "^2.2",
+        "juzaweb/laravel-chunk-upload": "^1.5",
+        "juzaweb/laravel-translation-loader": "^2.0",
+        "laravel/socialite": "^5.5",
+        "laravel/passport": "^10.4",
+        "rcrowe/twigbridge": "^0.14",
+        "spatie/image-optimizer": "^1.4",
+        "league/fractal": "^0.20.1",
+        "laravel/sanctum": "^3.3"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    }
+}

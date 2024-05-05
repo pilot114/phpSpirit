@@ -1,0 +1,34 @@
+{
+    "name": "daverandom/libdns",
+    "description": "DNS protocol implementation written in pure PHP",
+    "license": "MIT",
+    "keywords": [
+        "dns"
+    ],
+    "support": {
+        "issues": "https://github.com/DaveRandom/LibDNS/issues"
+    },
+    "autoload": {
+        "psr-4": {
+            "DaveRandom\\LibDNS\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DaveRandom\\LibDNS\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "ext-ctype": "*",
+        "daverandom/callback-validator": "dev-master",
+        "daverandom/enum": "^1",
+        "daverandom/network-primitives": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6"
+    }
+}

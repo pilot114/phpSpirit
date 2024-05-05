@@ -1,0 +1,55 @@
+{
+    "name": "wikimedia/at-ease",
+    "description": "Safe replacement to @ for suppressing warnings.",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.mediawiki.org/wiki/at-ease",
+    "authors": [
+        {
+            "name": "Tim Starling",
+            "email": "tstarling@wikimedia.org"
+        },
+        {
+            "name": "MediaWiki developers",
+            "email": "wikitech-l@lists.wikimedia.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Wikimedia\\AtEase\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "mediawiki/mediawiki-codesniffer": "43.0.0",
+        "mediawiki/mediawiki-phan-config": "0.14.0",
+        "mediawiki/minus-x": "1.1.1",
+        "ockcyp/covers-validator": "1.6.0",
+        "php-parallel-lint/php-console-highlighter": "1.0.0",
+        "php-parallel-lint/php-parallel-lint": "1.3.2",
+        "phpunit/phpunit": "9.6.16"
+    },
+    "scripts": {
+        "test": [
+            "parallel-lint . --exclude vendor",
+            "phpunit",
+            "covers-validator",
+            "@phpcs",
+            "phan --allow-polyfill-parser --long-progress-bar",
+            "minus-x check ."
+        ],
+        "cover": "phpunit --coverage-html coverage",
+        "fix": [
+            "minus-x fix .",
+            "phpcbf"
+        ],
+        "phan": "phan -d . --long-progress-bar",
+        "phpcs": "phpcs -sp"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}

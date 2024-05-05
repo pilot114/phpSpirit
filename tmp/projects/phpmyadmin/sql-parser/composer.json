@@ -1,0 +1,111 @@
+{
+    "name": "phpmyadmin/sql-parser",
+    "description": "A validating SQL lexer and parser with a focus on MySQL dialect.",
+    "license": "GPL-2.0-or-later",
+    "keywords": [
+        "sql",
+        "lexer",
+        "parser",
+        "analysis",
+        "sql syntax highlighter",
+        "sql lexer",
+        "sql tokenizer",
+        "sql parser",
+        "sql linter",
+        "query linter"
+    ],
+    "homepage": "https://github.com/phpmyadmin/sql-parser",
+    "authors": [
+        {
+            "name": "The phpMyAdmin Team",
+            "email": "developers@phpmyadmin.net",
+            "homepage": "https://www.phpmyadmin.net/team/"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/phpmyadmin/sql-parser/issues",
+        "source": "https://github.com/phpmyadmin/sql-parser"
+    },
+    "funding": [
+        {
+            "type": "other",
+            "url": "https://www.phpmyadmin.net/donate/"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "symfony/polyfill-mbstring": "^1.24"
+    },
+    "require-dev": {
+        "phpbench/phpbench": "^1.2",
+        "phpmyadmin/coding-standard": "^4.0",
+        "phpmyadmin/motranslator": "^5.3",
+        "phpstan/extension-installer": "^1.2",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "phpunit/phpunit": "^10.0",
+        "psalm/plugin-phpunit": "^0.18.4",
+        "vimeo/psalm": "^5.7",
+        "zumba/json-serializer": "^3.2"
+    },
+    "conflict": {
+        "phpmyadmin/motranslator": "<5.2"
+    },
+    "suggest": {
+        "ext-mbstring": "For best performance",
+        "phpmyadmin/motranslator": "Translate messages to your favorite locale"
+    },
+    "bin": [
+        "bin/highlight-query",
+        "bin/lint-query",
+        "bin/sql-parser",
+        "bin/tokenize-query"
+    ],
+    "autoload": {
+        "psr-4": {
+            "PhpMyAdmin\\SqlParser\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpMyAdmin\\SqlParser\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "phpcbf": "@php phpcbf",
+        "phpcs": "@php phpcs",
+        "phpstan": "@php phpstan analyse",
+        "psalm": "@php psalm --no-diff",
+        "phpunit": "@php phpunit --color=always",
+        "phpbench": "@php phpbench run tests/benchmarks --report=aggregate",
+        "test": [
+            "@phpcs",
+            "@phpstan",
+            "@psalm",
+            "@phpunit"
+        ],
+        "update:baselines": [
+            "@php phpstan analyse --generate-baseline",
+            "@php psalm --set-baseline=psalm-baseline.xml"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "archive": {
+        "exclude": [
+            "/tests",
+            "/phpunit.xml.dist"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "6.0-dev"
+        }
+    }
+}

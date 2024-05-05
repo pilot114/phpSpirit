@@ -1,0 +1,62 @@
+{
+    "name": "hautelook/alice-bundle",
+    "description": "Symfony bundle to manage fixtures with Alice and Faker.",
+    "keywords": [
+        "Symfony",
+        "Fixture",
+        "ORM",
+        "Alice",
+        "Faker"
+    ],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Baldur Rensch",
+            "email": "brensch@gmail.com"
+        },
+        {
+            "name": "Th\u00e9o FIDRY",
+            "email": "theo.fidry@gmail.com",
+            "homepage": "https://github.com/theofidry"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Hautelook\\AliceBundle\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hautelook\\AliceBundle\\": [
+                "fixtures",
+                "tests"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "doctrine/doctrine-bundle": "^2.11.3",
+        "doctrine/data-fixtures": "^1.7",
+        "doctrine/orm": "^3.1",
+        "doctrine/persistence": "^3.3.1",
+        "psr/log": "^1.0 || ^2.0 || ^3.0",
+        "symfony/finder": "^6.4 || ^7.0",
+        "symfony/framework-bundle": "^6.4 || ^7.0",
+        "theofidry/alice-data-fixtures": "^1.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6.17",
+        "phpspec/prophecy": "^1.14.0",
+        "symfony/phpunit-bridge": "^6.4.4 || ^7.0",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "monolog/monolog": "^3.5"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        },
+        "bin-dir": "bin",
+        "sort-packages": true
+    }
+}

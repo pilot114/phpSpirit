@@ -1,0 +1,32 @@
+{
+    "name": "qossmic/deptrac-shim",
+    "description": "deptrac phar distribution",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tim Glabisch"
+        },
+        {
+            "name": "Simon M\u00f6nch"
+        },
+        {
+            "name": "Denis Brumann"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-json": "*",
+        "ext-tokenizer": "*",
+        "ext-zlib": "*"
+    },
+    "bin": [
+        "deptrac"
+    ],
+    "abandoned": "qossmic/deptrac",
+    "replace": {
+        "qossmic/deptrac": "self.version"
+    },
+    "suggest": {
+        "ext-dom": "For using the JUnit output formatter"
+    }
+}

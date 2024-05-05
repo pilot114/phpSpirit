@@ -1,0 +1,25 @@
+{
+    "name": "juzaweb/dev-tool",
+    "homepage": "https://juzaweb.com",
+    "description": "Develop Tool for Juzaweb CMS",
+    "license": "GPL-2.0",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Juzaweb\\DevTool\\Providers\\DevToolServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Juzaweb\\DevTool\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.0|^8.1"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "juzaweb/modules": "dev-latest"
+    }
+}

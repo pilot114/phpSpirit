@@ -1,0 +1,33 @@
+{
+    "name": "codeception/lib-xml",
+    "description": "Files used by module-rest and module-soap",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "codeception"
+    ],
+    "authors": [
+        {
+            "name": "Gintautas Miselis"
+        }
+    ],
+    "homepage": "https://codeception.com/",
+    "require": {
+        "php": "^8.0",
+        "ext-dom": "*",
+        "codeception/lib-web": "^1.0.6",
+        "symfony/css-selector": ">=4.4.24 <8.0"
+    },
+    "conflict": {
+        "codeception/codeception": "<5.0.0-alpha3"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "config": {
+        "classmap-authoritative": true,
+        "sort-packages": true
+    }
+}

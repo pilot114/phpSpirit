@@ -1,0 +1,57 @@
+{
+    "name": "barryvdh/laravel-snappy",
+    "description": "Snappy PDF/Image for Laravel",
+    "keywords": [
+        "laravel",
+        "snappy",
+        "pdf",
+        "image",
+        "wkhtmltopdf",
+        "wkhtmltoimage"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Barry vd. Heuvel",
+            "email": "barryvdh@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "illuminate/support": "^9|^10|^11.0",
+        "illuminate/filesystem": "^9|^10|^11.0",
+        "knplabs/knp-snappy": "^1.4.4"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7|^8|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Barryvdh\\Snappy\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Barryvdh\\Snappy\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Barryvdh\\Snappy\\ServiceProvider"
+            ],
+            "aliases": {
+                "PDF": "Barryvdh\\Snappy\\Facades\\SnappyPdf",
+                "SnappyImage": "Barryvdh\\Snappy\\Facades\\SnappyImage"
+            }
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

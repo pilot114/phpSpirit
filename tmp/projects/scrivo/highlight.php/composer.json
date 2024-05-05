@@ -1,0 +1,79 @@
+{
+    "name": "scrivo/highlight.php",
+    "description": "Server side syntax highlighter that supports 185 languages. It's a PHP port of highlight.js",
+    "keywords": [
+        "code",
+        "syntax",
+        "highlight",
+        "highlight.js",
+        "highlight.php"
+    ],
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "scripts": {
+        "format": "php-cs-fixer fix $(if [ ! -z $CI ]; then echo \"--format=checkstyle\"; fi)",
+        "test:detection": "phpunit test/Highlight/DetectionTest.php",
+        "test:markup": "phpunit test/Highlight/MarkupTest.php",
+        "test": "phpunit -v",
+        "tools": "@composer bin all install --ansi"
+    },
+    "support": {
+        "issues": "https://github.com/scrivo/highlight.php/issues",
+        "source": "https://github.com/scrivo/highlight.php"
+    },
+    "autoload": {
+        "psr-4": {
+            "Highlight\\": "src/Highlight",
+            "HighlightUtilities\\": "src/HighlightUtilities"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Highlight\\Benchmark\\": "test/Benchmark",
+            "Highlight\\Tests\\": "test/Highlight",
+            "HighlightUtilities\\Tests\\": "test/HighlightUtilities"
+        }
+    },
+    "authors": [
+        {
+            "name": "Geert Bergman",
+            "homepage": "http://www.scrivo.org/",
+            "role": "Project Author"
+        },
+        {
+            "name": "Vladimir Jimenez",
+            "homepage": "https://allejo.io",
+            "role": "Maintainer"
+        },
+        {
+            "name": "Martin Folkers",
+            "homepage": "https://twobrain.io",
+            "role": "Contributor"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "php": ">=8.0",
+        "bamarni/composer-bin-plugin": "^1.8",
+        "phpbench/phpbench": "^1.0",
+        "phpunit/phpunit": "^5.7",
+        "sabberworm/php-css-parser": "^8.3",
+        "symfony/finder": "^4.4",
+        "symfony/var-dumper": "^4.4"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "10.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true
+        }
+    }
+}

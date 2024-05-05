@@ -1,0 +1,68 @@
+{
+    "name": "spatie/laravel-webhook-client",
+    "description": "Receive webhooks in Laravel apps",
+    "license": "MIT",
+    "keywords": [
+        "spatie",
+        "laravel-webhook-client"
+    ],
+    "authors": [
+        {
+            "name": "Freek Van der Herten",
+            "email": "freek@spatie.be",
+            "homepage": "https://spatie.be",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/spatie/laravel-webhook-client",
+    "require": {
+        "php": "^8.1 || ^8.2",
+        "illuminate/bus": "^9.0 || ^10.0 || ^11.0",
+        "illuminate/database": "^9.0 || ^10.0 || ^11.0",
+        "illuminate/support": "^9.0 || ^10.0 || ^11.0",
+        "spatie/laravel-package-tools": "^1.11"
+    },
+    "require-dev": {
+        "larastan/larastan": "^1.0.4 || ^2.2",
+        "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpunit/phpunit": "^9.3 || ^10.5",
+        "spatie/laravel-ray": "^1.24"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Spatie\\WebhookClient\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spatie\\WebhookClient\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "11.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Spatie\\WebhookClient\\WebhookClientServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    }
+}

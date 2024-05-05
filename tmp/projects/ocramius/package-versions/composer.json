@@ -1,0 +1,46 @@
+{
+    "name": "ocramius/package-versions",
+    "description": "Provides efficient querying for installed package versions (no runtime IO)",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marco Pivetta",
+            "email": "ocramius@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+        "composer-runtime-api": "^2.2.0"
+    },
+    "require-dev": {
+        "composer/composer": "^2.7.5",
+        "doctrine/coding-standard": "^12.0.0",
+        "ext-zip": "^1.15.0",
+        "roave/infection-static-analysis-plugin": "^1.35.0",
+        "phpunit/phpunit": "^9.6.19",
+        "vimeo/psalm": "^5.24.0"
+    },
+    "replace": {
+        "composer/package-versions-deprecated": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PackageVersions\\": "src/PackageVersions"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PackageVersionsTest\\": "test/PackageVersionsTest"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "infection/extension-installer": false
+        },
+        "platform": {
+            "php": "8.1.99"
+        }
+    }
+}

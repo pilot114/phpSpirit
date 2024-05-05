@@ -1,0 +1,28 @@
+{
+    "name": "sentry/sdk",
+    "type": "metapackage",
+    "description": "This is a meta package of sentry/sentry. We recommend using sentry/sentry directly.",
+    "keywords": [
+        "sentry",
+        "log",
+        "logging",
+        "error-monitoring",
+        "error-handler",
+        "crash-reporting",
+        "crash-reports"
+    ],
+    "homepage": "http://sentry.io",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sentry",
+            "email": "accounts@sentry.io"
+        }
+    ],
+    "require": {
+        "sentry/sentry": "^4.0"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

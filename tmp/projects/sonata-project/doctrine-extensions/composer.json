@@ -1,0 +1,78 @@
+{
+    "name": "sonata-project/doctrine-extensions",
+    "description": "Doctrine2 behavioral extensions",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "json",
+        "doctrine2",
+        "doctrine"
+    ],
+    "authors": [
+        {
+            "name": "Thomas Rabaix",
+            "email": "thomas.rabaix@sonata-project.org",
+            "homepage": "http://sonata-project.org"
+        },
+        {
+            "name": "Sonata Community",
+            "homepage": "https://github.com/sonata-project/sonata-doctrine-extensions/contributors"
+        }
+    ],
+    "homepage": "https://github.com/sonata-project/sonata-doctrine-extensions",
+    "require": {
+        "php": "^8.0",
+        "doctrine/dbal": "^3.4 || ^4.0",
+        "doctrine/persistence": "^3.0.2"
+    },
+    "require-dev": {
+        "doctrine/doctrine-bundle": "^2.10",
+        "doctrine/event-manager": "^1.2 || ^2.0",
+        "doctrine/mongodb-odm": "^2.4",
+        "doctrine/orm": "^2.16 || ^3.0",
+        "friendsofphp/php-cs-fixer": "^3.4",
+        "matthiasnoback/symfony-config-test": "^4.2 || ^5.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2.1 || ^5.0",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpstan/phpstan-strict-rules": "^1.0",
+        "phpunit/phpunit": "^9.5.13",
+        "psalm/plugin-phpunit": "^0.18",
+        "rector/rector": "^0.19",
+        "symfony/dependency-injection": "^5.4 || ^6.2 || ^7.0",
+        "symfony/doctrine-bridge": "^5.4 || ^6.2 || ^7.0",
+        "symfony/expression-language": "^5.4 || ^6.2 || ^7.0",
+        "symfony/framework-bundle": "^5.4 || ^6.2 || ^7.0",
+        "symfony/phpunit-bridge": "^6.2 || ^7.0",
+        "vimeo/psalm": "^5.0"
+    },
+    "conflict": {
+        "doctrine/doctrine-bundle": "<2.7",
+        "doctrine/mongodb-odm": "<2.4",
+        "doctrine/orm": "<2.16"
+    },
+    "suggest": {
+        "doctrine/mongodb-odm": "If you use mongo",
+        "doctrine/orm": "If you use doctrine orm",
+        "symfony/framework-bundle": "If you want to use symfony"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sonata\\Doctrine\\": "src/",
+            "Sonata\\Doctrine\\Bridge\\Symfony\\": "src/Bridge/Symfony/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sonata\\Doctrine\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "phpstan/extension-installer": true
+        },
+        "sort-packages": true
+    }
+}

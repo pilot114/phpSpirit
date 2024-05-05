@@ -7,13 +7,11 @@
 
   <h2>Common</h2>
   <p>Repositories analyzed: {{ report.head.repoCount }}</p>
-  <p>
-    Total size: {{ report.head.totalSize }}  |
-    .git files size: {{ report.head.totalGitSize }} |
-    php files size: {{ report.head.totalPhpSize }}
-  </p>
 
   <h2>Composer statistic</h2>
+  <!--
+  field: { name, desc, count, data<object|array> }
+  -->
   <template v-for="(field) in report.composerFields">
     <h3 >{{ field.name }}: {{ calcPersent(field.count) }}% ({{ field.count }})</h3>
     <b>{{ field.desc }}</b>
@@ -59,7 +57,7 @@ export default {
   name: 'App',
   data() {
     return {
-      report: report
+      report
     }
   },
   methods: {
@@ -72,3 +70,8 @@ export default {
 }
 </script>
 
+<style>
+  h2 {
+    margin-top: 24px;
+  }
+</style>

@@ -1,0 +1,45 @@
+{
+    "name": "fig/link-util",
+    "description": "Common utility implementations for HTTP links",
+    "keywords": [
+        "psr",
+        "psr-13",
+        "http",
+        "http-link",
+        "link",
+        "rest"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PHP-FIG",
+            "homepage": "https://www.php-fig.org/"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.0",
+        "psr/link": "^1.1.0 | ^2.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9",
+        "squizlabs/php_codesniffer": "^2.3.1"
+    },
+    "provide": {
+        "psr/link-implementation": "1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fig\\Link\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fig\\Link\\Test\\": "test/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

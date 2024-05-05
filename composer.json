@@ -14,5 +14,8 @@
         "allow-plugins": {
             "php-http/discovery": true
         }
+    },
+    "autoload": {
+        "files": ["./src/functions.php"]
     }
 }

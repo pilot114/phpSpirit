@@ -1,0 +1,65 @@
+{
+    "name": "datadog/php-datadogstatsd",
+    "type": "library",
+    "description": "An extremely simple PHP datadogstatsd client",
+    "keywords": [
+        "datadog",
+        "monitoring",
+        "logging",
+        "statsd",
+        "error-reporting",
+        "check",
+        "health"
+    ],
+    "homepage": "https://www.datadoghq.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alex Corley",
+            "email": "anthroprose@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Datadog",
+            "email": "dev@datadoghq.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "ext-sockets": "*"
+    },
+    "support": {
+        "email": "package@datadoghq.com",
+        "irc": "irc://irc.freenode.net/datadog",
+        "issues": "https://github.com/DataDog/php-datadogstatsd/issues",
+        "source": "https://github.com/DataDog/php-datadogstatsd",
+        "chat": "https://chat.datadoghq.com/"
+    },
+    "autoload": {
+        "psr-4": {
+            "DataDog\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "files": [
+            "tests/mt_rand_function_stubs.php",
+            "tests/socket_function_stubs.php"
+        ],
+        "psr-4": {
+            "DataDog\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "require-dev": {
+        "yoast/phpunit-polyfills": "^1.0.1",
+        "squizlabs/php_codesniffer": "^3.3"
+    },
+    "scripts": {
+        "fix-lint": "phpcbf",
+        "lint": "phpcs",
+        "test": "vendor/bin/phpunit"
+    }
+}

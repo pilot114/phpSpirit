@@ -1,0 +1,38 @@
+{
+    "name": "adyen/php-api-library",
+    "type": "library",
+    "description": "A PHP client library for accessing Adyen APIs",
+    "keywords": [
+        "adyen"
+    ],
+    "homepage": "https://github.com/Adyen/adyen-php-api-library",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.3",
+        "ext-ctype": "*",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*"
+    },
+    "require-dev": {
+        "dms/phpunit-arraysubset-asserts": "0.5.0",
+        "friendsofphp/php-cs-fixer": "*",
+        "phpunit/phpunit": "9.6.19",
+        "php-coveralls/php-coveralls": "2.7.0",
+        "squizlabs/php_codesniffer": "3.9.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adyen\\": "src/Adyen/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Adyen\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "fmt": "phpcbf src/Adyen/Service/** src/Adyen/Model/**"
+    }
+}
