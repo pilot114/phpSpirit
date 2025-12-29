@@ -1,0 +1,259 @@
+{
+    "name": "ghostwriter/coding-standard",
+    "description": "PHP Coding Standard",
+    "license": "BSD-4-Clause",
+    "type": "composer-plugin",
+    "keywords": [
+        "ghostwriter",
+        "coding-standard",
+        "dev"
+    ],
+    "authors": [
+        {
+            "name": "Nathanael Esayeas",
+            "email": "nathanael.esayeas@protonmail.com",
+            "homepage": "https://github.com/ghostwriter",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/ghostwriter/coding-standard",
+    "support": {
+        "issues": "https://github.com/ghostwriter/coding-standard/issues",
+        "forum": "https://github.com/ghostwriter/coding-standard/discussions",
+        "source": "https://github.com/ghostwriter/coding-standard",
+        "docs": "https://github.com/ghostwriter/coding-standard",
+        "rss": "https://github.com/ghostwriter/coding-standard/releases.atom",
+        "security": "https://github.com/ghostwriter/coding-standard/security/advisories/new"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/ghostwriter"
+        }
+    ],
+    "_comment": [
+        "#BlackLivesMatter",
+        "#FreePalestine",
+        "#StandWithUkraine",
+        "#StopGenocide"
+    ],
+    "require": {
+        "php": "~8.4.0 || ~8.5.0",
+        "ext-apcu": "*",
+        "ext-bcmath": "*",
+        "ext-ctype": "*",
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "ext-ds": "*",
+        "ext-event": "*",
+        "ext-exif": "*",
+        "ext-fileinfo": "*",
+        "ext-filter": "*",
+        "ext-gd": "*",
+        "ext-gettext": "*",
+        "ext-hash": "*",
+        "ext-iconv": "*",
+        "ext-igbinary": "*",
+        "ext-intl": "*",
+        "ext-json": "*",
+        "ext-libxml": "*",
+        "ext-mbstring": "*",
+        "ext-memcached": "*",
+        "ext-mysqli": "*",
+        "ext-openssl": "*",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "ext-pdo_pgsql": "*",
+        "ext-pdo_sqlite": "*",
+        "ext-pgsql": "*",
+        "ext-phar": "*",
+        "ext-protobuf": "*",
+        "ext-readline": "*",
+        "ext-redis": "*",
+        "ext-session": "*",
+        "ext-simplexml": "*",
+        "ext-sockets": "*",
+        "ext-sodium": "*",
+        "ext-sqlite3": "*",
+        "ext-tokenizer": "*",
+        "ext-xdebug": "*",
+        "ext-xml": "*",
+        "ext-xmlreader": "*",
+        "ext-xmlwriter": "*",
+        "ext-xsl": "*",
+        "ext-yaml": "*",
+        "ext-zend-opcache": "*",
+        "ext-zip": "*",
+        "ext-zlib": "*",
+        "composer-plugin-api": "~2.9.0",
+        "composer-runtime-api": "~2.2.2",
+        "composer/composer": "^2.9.2",
+        "ghostwriter/config": "^2.0.2",
+        "ghostwriter/console": "^0.1.2",
+        "mockery/mockery": "^1.6.12",
+        "nikic/php-parser": "^5.7.0",
+        "phpunit/phpunit": "^12.5.4",
+        "symfony/process": "^8.0.0",
+        "symfony/var-dumper": "^8.0.0"
+    },
+    "conflict": {
+        "pestphp/pest": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ghostwriter\\CodingStandard\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "": "tests/Fixture/",
+            "Tests\\": "tests/"
+        },
+        "files": [
+            "functions.php",
+            "tests/bootstrap.php"
+        ],
+        "exclude-from-classmap": [
+            "/tests/"
+        ]
+    },
+    "bin": [
+        "tools/phar/composer-normalize",
+        "tools/phar/composer-require-checker",
+        "tools/phar/composer-unused",
+        "tools/phar/infection",
+        "tools/phar/phive",
+        "tools/phar/phpactor",
+        "tools/phar/phpbench",
+        "tools/phar/phpdocumentor",
+        "tools/phar/psalm"
+    ],
+    "config": {
+        "allow-plugins": {
+            "ghostwriter/coding-standard": true
+        },
+        "bump-after-update": false,
+        "classmap-authoritative": false,
+        "discard-changes": true,
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.4.999"
+        },
+        "preferred-install": "dist",
+        "prepend-autoloader": true,
+        "process-timeout": 5000,
+        "sort-packages": true,
+        "use-parent-dir": false
+    },
+    "extra": {
+        "class": "Ghostwriter\\CodingStandard\\Plugin\\ComposerPlugin",
+        "ghostwriter": {
+            "container": {
+                "definition": "Ghostwriter\\CodingStandard\\Container\\CodingStandardDefinition"
+            },
+            "conflict": {
+                "enabled": true,
+                "vendors": [
+                    "250",
+                    "acmephp",
+                    "asm89",
+                    "async",
+                    "bilge",
+                    "binarykitten",
+                    "codelegance",
+                    "connectors",
+                    "doctrine",
+                    "ezsystems",
+                    "growthbook",
+                    "jdorn",
+                    "joomla",
+                    "jwage",
+                    "kazist",
+                    "khanamiryan",
+                    "larastan",
+                    "nunomaduro",
+                    "object-calisthenics",
+                    "ocramius",
+                    "pegasus",
+                    "pestphp",
+                    "phptal",
+                    "phptype",
+                    "pimcore",
+                    "provider",
+                    "roave",
+                    "scriptfusion",
+                    "silverstripe",
+                    "socialiteproviders",
+                    "spatie",
+                    "tga",
+                    "topthink",
+                    "yiisoft",
+                    "yuan1994",
+                    "zendframework",
+                    "zetacomponents",
+                    "zf-commons"
+                ]
+            }
+        },
+        "plugin-modifies-downloads": false,
+        "plugin-modifies-install-path": false,
+        "plugin-optional": false,
+        "thanks": {
+            "name": "ghostwriter/coding-standard",
+            "url": "https://github.com/ghostwriter/coding-standard"
+        }
+    },
+    "scripts": {
+        "bin_composer": "tools/phar/composer",
+        "bin_infection": "tools/phar/infection --ansi --min-covered-msi=0 --min-msi=0 --show-mutations --threads=max",
+        "bin_normalize": "tools/phar/composer-normalize",
+        "bin_phive": "tools/phar/phive",
+        "bin_phpunit": "tools/phar/phpunit --do-not-cache-result --colors=always",
+        "bin_psalm": "tools/phar/psalm --no-cache",
+        "cache:clear": "rm -rf ./.cache/*",
+        "check": [
+            "@cache:clear",
+            "@bin_composer validate",
+            "@test"
+        ],
+        "docker": [
+            "@docker:build",
+            "@docker:run"
+        ],
+        "docker:build": "docker buildx build --pull --tag workspace .",
+        "docker:run": "docker run -v $(PWD):/github/workspace -w=/github/workspace -e GITHUB_DEBUG=1 -e GITHUB_WORKSPACE=/github/workspace -e GITHUB_TOKEN=github-token -e SIGNING_SECRET_KEY=secret-key workspace",
+        "git:submodule:update": "git submodule update --depth=1 --init --recursive --recommend-shallow --remote",
+        "infection": [
+            "@xdebug",
+            "@bin_infection"
+        ],
+        "normalize": "@bin_normalize --no-cache --diff --no-check-lock --no-scripts --no-plugins",
+        "phive": [
+            "@bin_phive update --force-accept-unsigned",
+            "@bin_phive purge"
+        ],
+        "phive:install": "@bin_phive install --copy --force-accept-unsigned ",
+        "phive:update": "@bin_phive update",
+        "phpunit": [
+            "@xdebug",
+            "@bin_phpunit"
+        ],
+        "phpunit:migrate": [
+            "@xdebug",
+            "@bin_phpunit --migrate-configuration"
+        ],
+        "psalm": "@bin_psalm --show-info=true --no-diff --shepherd --stats",
+        "psalm:alter": "@bin_psalm --alter --allow-backwards-incompatible-changes=false --safe-types",
+        "psalm:baseline": "@bin_psalm --no-diff --set-baseline=psalm-baseline.xml",
+        "psalm:dry-run": "@bin_psalm --alter --issues=all --dry-run",
+        "psalm:fix": "@bin_psalm --alter --issues=UnnecessaryVarAnnotation",
+        "psalm:security": "@bin_psalm --no-diff --taint-analysis",
+        "psalm:update": "@bin_psalm --no-diff --update-baseline=psalm-baseline.xml",
+        "test": [
+            "@phpunit",
+            "@infection",
+            "@psalm"
+        ],
+        "xdebug": "@putenv XDEBUG_MODE=coverage"
+    }
+}

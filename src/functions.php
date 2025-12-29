@@ -253,7 +253,10 @@ class Report
         ];
     }
 
-
+    protected function readme(array $input): Field
+    {
+        return new Field('readme', 'readme', $input);
+    }
 
     protected function description(array $input): Field
     {

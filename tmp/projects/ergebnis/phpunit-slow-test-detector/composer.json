@@ -1,0 +1,78 @@
+{
+    "name": "ergebnis/phpunit-slow-test-detector",
+    "description": "Provides facilities for detecting slow tests in phpunit/phpunit.",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "phpunit",
+        "slow",
+        "test",
+        "detector",
+        "extension"
+    ],
+    "authors": [
+        {
+            "name": "Andreas M\u00f6ller",
+            "email": "am@localheinz.com",
+            "homepage": "https://localheinz.com"
+        }
+    ],
+    "homepage": "https://github.com/ergebnis/phpunit-slow-test-detector",
+    "support": {
+        "issues": "https://github.com/ergebnis/phpunit-slow-test-detector/issues",
+        "source": "https://github.com/ergebnis/phpunit-slow-test-detector",
+        "security": "https://github.com/ergebnis/phpunit-slow-test-detector/blob/main/.github/SECURITY.md"
+    },
+    "require": {
+        "php": "~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
+        "phpunit/phpunit": "^6.5.0 || ^7.5.0 || ^8.5.19 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.47.0",
+        "ergebnis/license": "^2.6.0",
+        "ergebnis/php-cs-fixer-config": "^6.52.0",
+        "fakerphp/faker": "~1.20.0",
+        "phpstan/extension-installer": "^1.4.3",
+        "phpstan/phpstan": "^1.12.11",
+        "phpstan/phpstan-deprecation-rules": "^1.2.1",
+        "phpstan/phpstan-phpunit": "^1.4.1",
+        "phpstan/phpstan-strict-rules": "^1.6.1",
+        "psr/container": "~1.0.0",
+        "rector/rector": "^1.2.10"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Ergebnis\\PHPUnit\\SlowTestDetector\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ergebnis\\PHPUnit\\SlowTestDetector\\Test\\": "test/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "phpstan/extension-installer": true
+        },
+        "audit": {
+            "abandoned": "report"
+        },
+        "platform": {
+            "php": "7.4.33"
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "2.16-dev"
+        },
+        "composer-normalize": {
+            "indent-size": 2,
+            "indent-style": "space"
+        }
+    }
+}

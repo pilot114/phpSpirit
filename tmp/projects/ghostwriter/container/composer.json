@@ -1,0 +1,129 @@
+{
+    "name": "ghostwriter/container",
+    "description": "Provides an extensible Dependency Injection Service Container for Automated Object Composition, Interception, and Lifetime Management.",
+    "license": "BSD-4-Clause",
+    "type": "library",
+    "keywords": [
+        "ghostwriter",
+        "container"
+    ],
+    "authors": [
+        {
+            "name": "Nathanael Esayeas",
+            "email": "nathanael.esayeas@protonmail.com",
+            "homepage": "https://github.com/ghostwriter",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/ghostwriter/container",
+    "support": {
+        "issues": "https://github.com/ghostwriter/container/issues",
+        "source": "https://github.com/ghostwriter/container",
+        "rss": "https://github.com/ghostwriter/container/releases.atom",
+        "security": "https://github.com/ghostwriter/container/security/advisories/new"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/ghostwriter"
+        }
+    ],
+    "_comment": [
+        "#BlackLivesMatter",
+        "#FreePalestine",
+        "#StandWithUkraine",
+        "#StopGenocide"
+    ],
+    "require": {
+        "php": "~8.4.0 || ~8.5.0",
+        "psr/container": "^2.0.2"
+    },
+    "require-dev": {
+        "ext-xdebug": "*",
+        "ghostwriter/coding-standard": "dev-main",
+        "mockery/mockery": "^1.6.12",
+        "phpunit/phpunit": "^12.5.4",
+        "symfony/var-dumper": "^8.0.0"
+    },
+    "provide": {
+        "psr/container-implementation": "*"
+    },
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Ghostwriter\\Container\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "": "tests/Fixture/",
+            "Tests\\": "tests/"
+        },
+        "files": [
+            "tests/Fixture/functions.php",
+            "tests/bootstrap.php"
+        ],
+        "exclude-from-classmap": [
+            "/tests/"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "ghostwriter/coding-standard": true
+        },
+        "bump-after-update": false,
+        "classmap-authoritative": false,
+        "discard-changes": true,
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.4.999"
+        },
+        "platform-check": true,
+        "preferred-install": "dist",
+        "prepend-autoloader": true,
+        "process-timeout": 5000,
+        "sort-packages": true,
+        "use-parent-dir": false
+    },
+    "extra": {
+        "ghostwriter": {
+            "container": {
+                "definition": "Ghostwriter\\Container\\Service\\Definition\\ContainerDefinition"
+            }
+        },
+        "thanks": {
+            "name": "ghostwriter/container",
+            "url": "https://github.com/ghostwriter/container"
+        }
+    },
+    "scripts": {
+        "cache:clear": "rm -rf ./.cache/*",
+        "check": [
+            "@cache:clear",
+            "tools/phar/composer validate",
+            "@test"
+        ],
+        "docker": [
+            "@docker:build",
+            "@docker:run"
+        ],
+        "docker:build": "docker buildx build --pull --tag workspace .",
+        "docker:run": "docker run -v $(PWD):/github/workspace -w=/github/workspace -e GITHUB_DEBUG=1 -e GITHUB_WORKSPACE=/github/workspace -e GITHUB_TOKEN=github-token -e SIGNING_SECRET_KEY=secret-key workspace",
+        "git:submodule:update": "git submodule update --depth=1 --init --recursive --recommend-shallow --remote",
+        "infection": [
+            "@xdebug",
+            "tools/phar/infection --min-covered-msi=0 --min-msi=0 --show-mutations --threads=max"
+        ],
+        "phpbench": "tools/phar/phpbench run --report='extends:aggregate,cols:[benchmark,subject,revs,its,mem_peak,mode,rstdev]' --time-unit=milliseconds ./tests/Benchmark",
+        "phpunit": [
+            "@xdebug",
+            "vendor/bin/phpunit --do-not-cache-result --colors=always"
+        ],
+        "test": [
+            "@phpunit",
+            "@infection"
+        ],
+        "unused": "tools/phar/composer-unused --no-interaction --ansi",
+        "xdebug": "@putenv XDEBUG_MODE=coverage"
+    }
+}

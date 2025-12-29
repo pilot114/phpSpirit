@@ -1,0 +1,82 @@
+{
+    "name": "maglnet/composer-require-checker",
+    "type": "library",
+    "description": "CLI tool to analyze composer dependencies and verify that no unknown symbols are used in the sources of a package",
+    "keywords": [
+        "composer",
+        "dependency",
+        "cli",
+        "static analysis",
+        "requirements",
+        "imports",
+        "require"
+    ],
+    "homepage": "https://github.com/maglnet/ComposerRequireChecker",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marco Pivetta",
+            "email": "ocramius@gmail.com",
+            "homepage": "http://ocramius.github.io/"
+        },
+        {
+            "name": "Matthias Glaub",
+            "email": "magl@magl.net",
+            "homepage": "http://magl.net"
+        }
+    ],
+    "require": {
+        "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
+        "ext-phar": "*",
+        "composer-runtime-api": "^2.0.0",
+        "azjezz/psl": "^4.2.0",
+        "nikic/php-parser": "^5.7.0",
+        "symfony/console": "^7.4.1",
+        "webmozart/glob": "^4.7.0"
+    },
+    "require-dev": {
+        "ext-zend-opcache": "*",
+        "doctrine/coding-standard": "^14.0.0",
+        "phing/phing": "^3.1.1",
+        "php-standard-library/phpstan-extension": "^2.0.2",
+        "php-standard-library/psalm-plugin": "^2.3",
+        "phpstan/phpstan": "^2.1.33",
+        "phpunit/phpunit": "^12.5.4",
+        "psalm/plugin-phpunit": "^0.19.5",
+        "roave/infection-static-analysis-plugin": "^1.43.0",
+        "spatie/temporary-directory": "^2.3.0",
+        "vimeo/psalm": "^6.14.3"
+    },
+    "conflict": {
+        "revolt/event-loop": "< 1.0.8"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "platform": {
+            "php": "8.3.99"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "infection/extension-installer": true
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.1-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "ComposerRequireChecker\\": "src/ComposerRequireChecker"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ComposerRequireCheckerTest\\": "test/ComposerRequireCheckerTest"
+        }
+    },
+    "bin": [
+        "bin/composer-require-checker"
+    ]
+}

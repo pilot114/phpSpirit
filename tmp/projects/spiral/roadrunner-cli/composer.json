@@ -1,0 +1,63 @@
+{
+    "name": "spiral/roadrunner-cli",
+    "type": "library",
+    "description": "RoadRunner: Command Line Interface",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anton Titov (wolfy-j)",
+            "email": "wolfy-j@spiralscout.com"
+        },
+        {
+            "name": "RoadRunner Community",
+            "homepage": "https://github.com/spiral/roadrunner/graphs/contributors"
+        }
+    ],
+    "bin": [
+        "bin/rr"
+    ],
+    "homepage": "https://roadrunner.dev",
+    "support": {
+        "docs": "https://docs.roadrunner.dev",
+        "issues": "https://github.com/roadrunner-server/roadrunner/issues",
+        "chat": "https://discord.gg/V6EK4he"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/roadrunner-server"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "ext-json": "*",
+        "composer/semver": "^3.4",
+        "spiral/roadrunner-worker": "^2 || ^3",
+        "spiral/tokenizer": "^2.13 || ^3.15",
+        "symfony/console": "^5.3 || ^6.0 || ^7.0 || ^8.0",
+        "symfony/http-client": "^4.4.51 || ^5.4.49 || ^6.4.17 || ^7.2 || ^8.0",
+        "symfony/yaml": "^5.4.49 || ^6.4.17 || ^7.2 || ^8.0"
+    },
+    "require-dev": {
+        "jetbrains/phpstorm-attributes": "^1.2",
+        "spiral/code-style": "^2.2.2",
+        "spiral/dumper": "^3.3",
+        "vimeo/psalm": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spiral\\RoadRunner\\Console\\": "src"
+        }
+    },
+    "scripts": {
+        "cs:diff": "php-cs-fixer fix --dry-run -v --diff --show-progress dots",
+        "cs:fix": "php-cs-fixer fix -v",
+        "psalm": "psalm",
+        "psalm:baseline": "psalm --set-baseline=psalm-baseline.xml"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
