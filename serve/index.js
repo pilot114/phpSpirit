@@ -1,6 +1,17 @@
 // Load and render report data
 let report = null;
 
+// Important fields to display
+const IMPORTANT_FIELDS = ['name', 'license', 'type', 'require'];
+
+// Field display names and descriptions
+const FIELD_INFO = {
+  'name': { title: 'Popular Vendors', desc: 'Most used package vendors in PHP ecosystem' },
+  'license': { title: 'Licenses', desc: 'Distribution of software licenses' },
+  'type': { title: 'Package Types', desc: 'Types of composer packages' },
+  'require': { title: 'Dependencies', desc: 'Most required packages' }
+};
+
 // Colors for pie charts
 const CHART_COLORS = [
   'rgb(54, 162, 235)',
@@ -10,12 +21,54 @@ const CHART_COLORS = [
   'rgb(18, 70, 86)',
   'rgb(124, 20, 111)',
   'rgb(136, 0, 2)',
+  'rgb(255, 99, 132)',
+  'rgb(75, 192, 192)',
+  'rgb(153, 102, 255)',
+  'rgb(201, 203, 207)'
 ];
 
 // Calculate percentage
 function calcPercent(value, total) {
   const percent = value / (total / 100);
   return Math.round(percent);
+}
+
+// Get top N items from data, group rest as "Others"
+function getTopItems(data, maxItems = 10) {
+  let items = [];
+
+  // Convert data to array of [label, value]
+  if (Array.isArray(Object.values(data)[0])) {
+    items = Object.entries(data).map(([label, arr]) => [label, arr.length]);
+  } else if (typeof Object.values(data)[0] === 'object') {
+    items = Object.entries(data).map(([label, obj]) => [label, Object.keys(obj).length]);
+  } else {
+    items = Object.entries(data).map(([label, val]) => [label, val]);
+  }
+
+  // Sort by value descending
+  items.sort((a, b) => b[1] - a[1]);
+
+  // Take top N and group rest
+  if (items.length > maxItems) {
+    const topItems = items.slice(0, maxItems);
+    const others = items.slice(maxItems);
+    const othersSum = others.reduce((sum, item) => sum + item[1], 0);
+
+    if (othersSum > 0) {
+      topItems.push(['Others', othersSum]);
+    }
+
+    return {
+      labels: topItems.map(item => item[0]),
+      data: topItems.map(item => item[1])
+    };
+  }
+
+  return {
+    labels: items.map(item => item[0]),
+    data: items.map(item => item[1])
+  };
 }
 
 // Create pie chart
@@ -49,55 +102,93 @@ function renderField(fieldName, field) {
   const container = document.createElement('div');
   container.className = 'field-container';
 
+  const info = FIELD_INFO[fieldName] || { title: fieldName, desc: '' };
+
   // Title
   const title = document.createElement('h3');
-  title.textContent = `${fieldName}: ${calcPercent(field.count, report.head.repoCount)}% (${field.count})`;
+  title.textContent = info.title;
   container.appendChild(title);
 
+  // Description
+  if (info.desc) {
+    const desc = document.createElement('p');
+    desc.className = 'field-description';
+    desc.textContent = info.desc;
+    container.appendChild(desc);
+  }
+
+  // Stats
+  const stats = document.createElement('p');
+  stats.className = 'field-stats';
+  stats.textContent = `Coverage: ${calcPercent(field.count, report.head.repoCount)}% (${field.count} repositories)`;
+  container.appendChild(stats);
+
   // Data
-  if (typeof field.data !== 'object') {
+  if (typeof field.data !== 'object' || field.data === null) {
     // Simple string/number value
     const p = document.createElement('p');
     p.textContent = field.data;
     container.appendChild(p);
   } else {
-    // Object data
-    const firstValue = field.data[Object.keys(field.data)[0]];
+    // Get top items
+    const topData = getTopItems(field.data, 10);
 
-    if (Array.isArray(firstValue)) {
-      // Data format: {name1: [], name2: []}
-      const chartContainer = document.createElement('div');
-      chartContainer.className = 'chart-container';
-      container.appendChild(chartContainer);
+    // Create chart
+    const chartContainer = document.createElement('div');
+    chartContainer.className = 'chart-container';
+    container.appendChild(chartContainer);
 
-      const labels = Object.keys(field.data);
-      const data = Object.values(field.data).map(x => x.length);
-      createPieChart(chartContainer, labels, data);
-    } else if (typeof firstValue === 'object') {
-      // Data format: {name1: {}, name2: {}}
-      const chartContainer = document.createElement('div');
-      chartContainer.className = 'chart-container';
-      container.appendChild(chartContainer);
-
-      const labels = Object.keys(field.data);
-      const data = Object.values(field.data).map(x => Object.keys(x).length);
-      createPieChart(chartContainer, labels, data);
-    } else {
-      // Data format: {value: name, ...} - render as list
-      const ul = document.createElement('ul');
-      for (const [value, name] of Object.entries(field.data)) {
-        const li = document.createElement('li');
-        const b = document.createElement('b');
-        b.textContent = value;
-        li.appendChild(b);
-        li.appendChild(document.createTextNode(`: ${name}`));
-        ul.appendChild(li);
-      }
-      container.appendChild(ul);
-    }
+    createPieChart(chartContainer, topData.labels, topData.data);
   }
 
   return container;
+}
+
+// Render summary statistics
+function renderSummary() {
+  const container = document.getElementById('summary');
+  container.innerHTML = '';
+
+  // Count total packages
+  let totalPackages = 0;
+  if (report.composerFields.name && report.composerFields.name.data) {
+    totalPackages = Object.values(report.composerFields.name.data).reduce((sum, arr) => sum + arr.length, 0);
+  }
+
+  // Count total vendors
+  let totalVendors = 0;
+  if (report.composerFields.name && report.composerFields.name.data) {
+    totalVendors = Object.keys(report.composerFields.name.data).length;
+  }
+
+  // Count total licenses
+  let totalLicenses = 0;
+  if (report.composerFields.license && report.composerFields.license.data) {
+    totalLicenses = Object.keys(report.composerFields.license.data).length;
+  }
+
+  const summaryData = [
+    { title: 'Repositories', value: report.head.repoCount },
+    { title: 'Packages', value: totalPackages },
+    { title: 'Vendors', value: totalVendors },
+    { title: 'Licenses', value: totalLicenses }
+  ];
+
+  summaryData.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'summary-card';
+
+    const title = document.createElement('h3');
+    title.textContent = item.title;
+
+    const number = document.createElement('div');
+    number.className = 'number';
+    number.textContent = item.value.toLocaleString();
+
+    card.appendChild(title);
+    card.appendChild(number);
+    container.appendChild(card);
+  });
 }
 
 // Render all composer fields
@@ -106,8 +197,11 @@ function renderComposerFields() {
   container.innerHTML = '';
 
   if (report.composerFields) {
-    for (const [fieldName, field] of Object.entries(report.composerFields)) {
-      container.appendChild(renderField(fieldName, field));
+    // Render only important fields
+    for (const fieldName of IMPORTANT_FIELDS) {
+      if (report.composerFields[fieldName]) {
+        container.appendChild(renderField(fieldName, report.composerFields[fieldName]));
+      }
     }
   }
 }
@@ -119,7 +213,10 @@ async function init() {
     report = await response.json();
 
     // Render repo count
-    document.getElementById('repo-count').textContent = report.head.repoCount;
+    document.getElementById('repo-count').textContent = report.head.repoCount.toLocaleString();
+
+    // Render summary
+    renderSummary();
 
     // Render composer fields
     renderComposerFields();
